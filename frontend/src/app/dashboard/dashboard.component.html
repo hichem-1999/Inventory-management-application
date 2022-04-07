@@ -1,0 +1,140 @@
+<div class="main-content">
+  <div class="container-fluid">
+      
+      <div class="row">
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-warning card-header-icon">
+                      <div class="card-icon">
+                        <i class="fa fa-arrow-up" aria-hidden="true"></i>
+                      </div>
+                      <p class="card-category">Le Plus Cher</p>
+                     <h3 class="card-title" ngModel >{{produit.libPrd}}<br>{{produit.marque.libMarque}}<br>{{produit.prixPrd}}<span>$</span></h3> 
+                    
+                     
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Juste mis à jour
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-success card-header-icon">
+                      <div class="card-icon">
+                          <i class="material-icons" >store</i>
+                      </div>
+                      <p class="card-category">Revenue</p>
+                      <h3 class="card-title" ngModel>+{{benefice}}$</h3>
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Juste mis à jour
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-info card-header-icon">
+                      <div class="card-icon">
+                        <i class="fa fa-arrow-down" aria-hidden="true"></i>
+                         
+                      </div>
+                      <p class="card-category">Le Moins Cher</p>
+                     <h3 class="card-title" ngModel >{{k.libPrd}}<br>{{k.marque.libMarque}}<br>{{k.prixPrd}}<span>$</span></h3> 
+                  </div>
+                  <div class="card-footer">
+                    <div class="stats">
+                        <i class="material-icons">update</i> Juste mis à jour
+                    </div>
+                </div>
+              </div>
+          </div>
+          <div class="col-lg-3 col-md-6 col-sm-6">
+              <div class="card card-stats">
+                  <div class="card-header card-header-danger card-header-icon">
+                      <div class="card-icon">
+                        <i class="material-icons">info_outline</i>
+                      </div>
+                      <p class="card-category">Nombre Des Articles </p>
+                      <h3 class="card-title" ngModel>{{nbreArt}}</h3>
+                  </div>
+                  <div class="card-footer">
+                      <div class="stats">
+                          <i class="material-icons">update</i> Juste mis à jour
+                      </div>
+                  </div>
+              </div>
+          </div>
+      </div>
+     
+     <div class="row">
+        <div class="col-lg-6 col-md-12">
+            <div class="card">
+                <div class="card-header card-header-warning">
+                    <h4 class="card-title">Fournisseur </h4>
+                    <button  routerLink='/liste-fournisseur' type="button" class="btn btn-warning">more details</button>
+                    
+                </div>
+                <div class="card-body table-responsive">
+                    <table class="table table-hover" >
+                            <thead class=" text-danger text-center">
+    
+                                <th>
+                                    Nom
+                                </th>
+           
+                                <th>
+                                    Telephone
+                                
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let fournisseur of fournisseurs" class="th-actions text-center">
+    
+                            <th >{{fournisseur?.nomUser}}</th>
+                            <th >{{fournisseur?.telUser}}</th>
+    
+                </tr>
+            </tbody>
+      
+                    </table>
+                </div>
+            </div>
+        </div>
+          <div class="col-lg-6 col-md-12">
+              <div class="card">
+                  <div class="card-header card-header-info">
+                      <h4 class="card-title">Client</h4>
+                      <button routerLink="/liste-client" type="button" class="btn btn-info">more details</button>
+                  </div>
+                  <div class="card-body table-responsive">
+                    <table class="table table-hover" >
+                        <thead class=" text-info text-center">
+
+                            <th>
+                                Nom
+                            </th>
+       
+                            <th>
+                                Telephone
+                            
+                        </thead>
+                        <tbody>
+                        <tr *ngFor="let client of clients" class="th-actions text-center">
+
+                        <th >{{client?.nomUser}}</th>
+                        <th >{{client?.telUser}}</th>
+
+            </tr>
+        </tbody>
+  
+                </table>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>

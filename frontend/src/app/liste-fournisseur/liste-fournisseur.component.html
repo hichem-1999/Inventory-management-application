@@ -1,0 +1,173 @@
+<div class="main-content" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste Des Fournisseurs</h4>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input type="search" (ngModelChange)="searchFournisseur(key.value)" #key="ngModel" ngModel
+                                name="key" id="searchName" class="form-control mr-sm-2" placeholder="Recherche Fournisseurs..." required>
+                                <a disabled  type="icon" >
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </a>
+    
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <thead class=" text-primary text-center">
+    
+                                <th>
+                                    Nom
+                                </th>
+                                
+                                <th>
+                                    Adresse
+                                </th>
+                                <th>
+                                    Telephone
+                                </th>
+                                <th>
+                                    Email
+                                </th>
+                                
+                                <th>
+                                    Pays
+                                </th>
+                                <th>
+                                    Ville
+                                </th>
+                                <th>
+                                    Code Postal
+                                </th>
+                                <th>
+                                    Date Naissance
+                                </th>
+                               
+                                <th>
+                                    Modifier/Supprimer
+                                </th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let fournisseur of fournisseurs" class="th-actions text-center">
+    
+                            <th >{{fournisseur?.nomUser}}</th>
+                            <th >{{fournisseur?.adresseUser}}</th>
+                            <th >{{fournisseur?.telUser}}</th>
+                            <th >{{fournisseur?.emailUser}}</th>
+                           
+                            <th >{{fournisseur?.paysUser}}</th>
+                            <th >{{fournisseur?.villeUser}}</th>
+                            <th >{{fournisseur?.codePostalUser}}</th>
+                            <th >{{fournisseur?.dateNaissanceUser}}</th>
+                           
+                            <th ><div class="th-actions text-center">
+                                <a  (click)="onOpenModal(fournisseur, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Modifier" [matTooltipPosition]="'above'"
+                                data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                <a (click)="onOpenModal(fournisseur, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Supprimer" [matTooltipPosition]="'above'"data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div></th>
+    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+            </div>
+            </div>
+            </div>
+    <button routerLink='/ajout-fournisseur' mat-raised-button  class="btn btn-danger pull-right">ajouter fournisseur </button>
+            </div>
+            </div>
+<!--edit Fournisseur-->
+    <div class="modal fade" id="updateFournisseurModal" tabindex="-1" role="dialog" aria-labelledby="fournisseurEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateFournisseurModalLabel">Modifier Fournisseur </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm">
+                <div class="form-group">
+                    <label for="nomUser">nom</label>
+                    <input type="text" ngModel="{{editFournisseur?.nomUser}}" name="nomUser" class="form-control" id="name" placeholder="Name" required>
+                </div>
+                <input type="hidden" ngModel="{{editFournisseur?.id}}" name="id" class="form-control" id="id" >
+                
+    
+    
+                
+                <div class="form-group">
+                    <label for="dateNaissanceUser">date Naissance</label>
+                    <input type="date" ngModel="{{editFournisseur?.dateNaissanceUser}}" name="dateNaissanceUser" class="form-control" id="dateNaissanceUser" placeholder="date Naissance fournisseur" required>
+                </div>
+                <div class="form-group">
+                    <label for="adresseUser">adresse</label>
+                    <input type="text" ngModel="{{editFournisseur?.adresseUser}}" name="adresseUser" class="form-control" id="adresseUser" placeholder="adresse" required>
+                </div>
+                <div class="form-group">
+                    <label for="phone">telephone</label>
+                    <input type="tel" ngModel="{{editFournisseur?.telUser}}" name="telUser" class="form-control" id="telUser" placeholder="telUser" required>
+                    <div class="form-group">
+                        <label for="emailUser">email</label>
+                        <input type="email"  ngModel="{{editFournisseur?.emailUser}}" name="emailUser" class="form-control" id="emailUser" placeholder="emailUser" required>
+                    </div>
+                    
+    
+                </div>
+                <div class="form-group">
+                    <label for="paysUser">pays</label>
+                    <input type="text" ngModel="{{editFournisseur?.paysUser}}" name="paysUser" class="form-control" id="paysUser" placeholder="paysUser" required>
+                </div>
+                <div class="form-group">
+                    <label for="villeUser">ville</label>
+                    <input type="text" ngModel="{{editFournisseur?.villeUser}}" name="villeUser" class="form-control" id="villeUser" placeholder="villeUser" required>
+                </div>
+                <div class="form-group">
+                    <label for="codePostalUser">code Postal</label>
+                    <input type="number" ngModel="{{editFournisseur?.codePostalUser}}" name="codePostalUser" class="form-control" id="codePostalUser" placeholder="codePostalUser" required>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                    <button (click)="onUpdateFournisseur(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Sauvgarder</button>
+            </div>
+        </form>
+    </div>
+    </div>
+            </div>
+            </div>
+    
+            <!-- Delete Modal-->
+    <div class="modal fade" id="deleteFournisseurModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Supprimer Fournisseur</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>êtes-vous sûr de vouloir supprimer Fournisseur: <span>{{deleteFournisseur?.nomUser}}</span></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button (click)="onDeleteFournisseur(deleteFournisseur?.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
+            </div>
+        </div>
+    </div>
+    </div>
+            </div>
+        
+        

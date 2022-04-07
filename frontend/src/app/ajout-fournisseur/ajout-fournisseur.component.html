@@ -1,0 +1,100 @@
+<div class="main-content">
+  <div class="container-fluid">
+    <div class="row">
+      <div class="col-md-8">
+        <div class="card">
+          <div class="card-header card-header-danger">
+            <h4 class="card-title">Ajout Fournisseur</h4>
+  
+          </div>
+          <div class="card-body">
+            <form #addForm="ngForm" (ngSubmit)="onAddFournisseur(addForm)">
+            <div class="row">
+  
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput ngModel name="nomUser"  id="nomUser" placeholder="nom" required>
+                </mat-form-field>
+              </div>
+             
+              <div class="col-md-3">
+                <mat-form-field class="example-full-width">
+                  <input matInput type="date" ngModel name="dateNaissanceUser"  id="dateNaissanceUser" placeholder="date Naissance" required>
+                </mat-form-field>
+              </div>
+  
+            </div>
+              <!--<div class="row">
+            <div class="col-md-3">
+                            <mat-form-field class="example-full-width">
+                              <input matInput ngModel name="genreUser" id="genreUser" placeholder="genre"type="text" required>
+                            </mat-form-field>
+                          </div>
+             
+
+              <div class="col-md-3">
+                <mat-form-field appearance="fill">
+                  <mat-label>Produit</mat-label>
+                  <mat-select ngModel name="produits" >
+                    <mat-option  ngFor="let produit of produits"  id="produits"  [value]="produits"  >{{produit.idPrd}}</mat-option>
+                </mat-select>
+              </mat-form-field>
+            </div>
+  
+          </div>-->
+          <div class="row">
+            <div class="col-md-12">
+              <mat-form-field class="example-full-width">
+                <input matInput type="tel" ngModel name="telUser" id="telUser" placeholder="telephone" required>
+              </mat-form-field>
+            </div>
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput type="email" ngModel name="emailUser"  id="emailUser" placeholder="email" required>
+              </mat-form-field>
+            </div>
+            <!--<div class="col-md-4">
+                        <mat-form-field class="example-full-width">
+                          <input matInput type="text" ngModel name="statusUser"  id="statusUser" placeholder="status" required>
+                        </mat-form-field>
+                      </div>-->
+  
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" ngModel name="adresseUser"  id="adresse" placeholder="adresse" required>
+              </mat-form-field>
+            </div>
+  
+          </div>
+          <div class="row">
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput  type="text"  ngModel name="paysUser"  id="paysUser" placeholder="pays" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput type="text" ngModel name="villeUser"  id="villeUser" placeholder="ville" required>
+              </mat-form-field>
+            </div>
+            <div class="col-md-4">
+              <mat-form-field class="example-full-width">
+                <input matInput type="number" ngModel name="codePostalUser"  id="codePostalUser" placeholder="code postal" required>
+              </mat-form-field>
+            </div>
+  
+  
+          </div>
+          <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="showNotification('bottom','right','fournisseur')" [disabled]="addForm.invalid">ajouter fournisseur</button>
+        <button routerLink='/liste-fournisseur' mat-raised-button  class="btn btn-danger pull-right">retour liste des fournisseurs </button>
+        <div class="clearfix"></div>
+      </form>
+    </div>
+  </div>
+  </div>
+      </div>
+      </div>
+      </div>
+  

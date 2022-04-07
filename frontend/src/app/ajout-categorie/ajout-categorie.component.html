@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajout Categorie</h4>
+                        
+                    </div>
+                    <div class="card-body">
+                        <form #addForm="ngForm" (ngSubmit)="onAddCategorie(addForm)">
+                            <div class="row">
+                                
+                                <div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                      <input type="text" matInput ngModel name="libCategorie" class="form-control" id="libCategorie" placeholder="Categorie" required>
+                                    </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="showNotification('bottom','right','categorie')" [disabled]="addForm.invalid">Ajout Categorie</button>
+                            
+                            <button routerLink='/liste-categorie' mat-raised-button  class="btn btn-danger pull-right">retour liste des categories </button>
+                            <div class="clearfix"></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

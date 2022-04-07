@@ -1,0 +1,111 @@
+<div class="main-content" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste Des Categories</h4>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                          </button>
+                    </div>
+                    
+                <div class="card-body">
+                    <div class="col-md-12">
+                       <form class="form-inline my-2 my-lg-0">
+                           <input type="search" (ngModelChange)="searchCategorie(key.value)" #key="ngModel" ngModel
+                            name="key" id="searchName" class="form-control mr-sm-2" placeholder="Recherche Categories..." required>
+                            <a disabled  type="icon" >
+                               <i class="material-icons">search</i>
+                               <div class="ripple-container"></div>
+                            </a>
+
+                        </form>
+                       </div>
+               </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary text-center">
+                                    
+                                    <th>
+                                        Categorie
+                                    </th>
+                                    
+                                    
+                                   <th>
+                                      Modifier/Supprimer
+                                   </th>
+                                </thead>
+                                <tbody>
+                                  <tr *ngFor="let categorie of categories" class="th-actions text-center">
+                                      
+                                      <th >{{categorie?.libCategorie}}</th>
+                                      <th >
+                                         <div class="th-actions text-center">
+                                          <a  (click)="onOpenModal(categorie, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip"  matTooltip="Modifier" [matTooltipPosition]="'above'" 
+                                          data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                          <a (click)="onOpenModal(categorie, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Supprimer" [matTooltipPosition]="'above'"data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                      </div>
+                                    </th>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button routerLink='/ajout-categorie' mat-raised-button  class="btn btn-danger pull-right">ajouter  </button>
+    </div>
+  </div>
+     <!--edit categorie-->
+     <div class="modal fade" id="updateCategorieModal" tabindex="-1" role="dialog" aria-labelledby="categorieEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="updateCategorieModalLabel">Modifier Categorie </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      <div class="modal-body">
+      <form #editForm="ngForm">
+      <div class="form-group">
+      <label for="libCategorie">libCategorie</label>
+      <input type="text" ngModel="{{editCategorie?.libCategorie}}" name="libCategorie" class="form-control" id="libCategorie" placeholder="libCategorie" required>
+      </div>
+      <input type="hidden" ngModel="{{editCategorie?.id}}" name="id" class="form-control" id="id" placeholder="id">
+     <div class="modal-footer">
+      <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+      <button (click)="onUpdateCategorie(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Sauvgarder</button>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      </div>
+      
+        <!--Delete Modal-->
+        <div class="modal fade" id="deleteCategorieModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Supprimer Categorie</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"></span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <p>êtes-vous sûr de vouloir supprimer Categorie: <span>{{deleteCategorie?.libCategorie}}</span></p>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+        <button (click)="onDeleteCategorie(deleteCategorie?.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        
+        </div>
+        
+      

@@ -1,0 +1,142 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajout Produit</h4>
+                       
+                    </div>
+                    <div class="card-body">
+                        <form #addForm="ngForm" (ngSubmit)="onAddProduit(addForm)">
+                            <div class="row"> 
+                                <!--<div class="col-md-3">
+                                    <mat-form-field class="example-full-width">
+                                      <input  type="text" matInput ngModel name="libPrd" class="form-control" id="libPrd" placeholder="nom produit" required>
+                                    </mat-form-field>
+                                </div>-->
+                                <div class="col-md-4">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Produit</mat-label>
+                                    <mat-select name="libPrd" (ngModelChange)="getQteAchete(libPrd.value)" #libPrd="ngModel" ngModel>
+                                      <mat-option  *ngFor="let commandeAchat of commandeAchats"  id="libPrd"  [value]="commandeAchat.product">
+                                        {{commandeAchat.product}}
+                                    </mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                                <!--<div class="col-md-4">
+                                  <mat-form-field appearance="fill" >
+                                      <mat-label>Produit</mat-label>
+                                      <mat-select ngModel name="libPrd">
+                                          
+                                          <mat-option value="chemise">chemise</mat-option>
+                                          <mat-option value="pull">pull</mat-option>
+                                          <mat-option value="jean">jean </mat-option>
+                                          <mat-option value="chaussure">chaussure </mat-option>
+                                          <mat-option value="accesoire">accesoire </mat-option>
+                                      </mat-select>
+                                  </mat-form-field>
+                              </div>-->
+                                <div class="col-md-3">
+                                  <label>soldée</label>
+                                  <div class="form-inline " >
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input"  ngModel name="soldePrd" id="soldePrd"  value="oui">oui
+                                    </label>
+                                  </div>
+                                  <div class="form-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input"  ngModel name="soldePrd" id="soldePrd"  value="non" >non
+                                    </label>
+                                  </div>
+                                  
+                                 
+                                </div>
+                                 
+                                  <div class="col-md-3">
+                                    <label>nouveautée</label>
+                                    <div class="form-inline">
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input"  ngModel name="nouveautePrd" id="nouveautePrd"  value="oui">oui
+                                      </label>
+                                    </div>
+                                    <div class="form-inline">
+                                      <label class="form-check-label">
+                                        <input type="radio" class="form-check-input"  ngModel name="nouveautePrd" id="nouveautePrd"  value="non" >non
+                                      </label>
+                                    </div>
+                                   
+                                  </div>
+                            </div>
+
+
+                                  <div class="row"> 
+                                  <div class="col-md-3">
+                                    <mat-form-field appearance="fill">
+                                      <mat-label>Categorie</mat-label>
+                                      <mat-select ngModel name="categorie" >
+                                        <mat-option  *ngFor="let categorie of categories"  id="categorie"  [value]="categorie"  >{{categorie.libCategorie}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>
+                                  <div class="col-md-3">
+                                    <mat-form-field appearance="fill">
+                                      <mat-label>Marque</mat-label>
+                                      <mat-select ngModel name="marque" >
+                                        <mat-option  *ngFor="let marque of marques"  id="marque"  [value]="marque"  >{{marque.libMarque}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>
+                                  <!--<div class="col-md-3">
+                                    <mat-form-field appearance="fill">
+                                      <mat-label>Fournisseur</mat-label>
+                                      <mat-select ngModel name="fournisseur" >
+                                        <mat-option  *ngFor="let fournisseur of fournisseurs"  id="fournisseur"  [value]="fournisseur"  >{{fournisseur.nomFrs}}</mat-option>
+                                      </mat-select>
+                                    </mat-form-field>
+                                  </div>-->
+                                  
+                                  </div>
+                            
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                    <input  type="number"  matInput name="quantiteDispoPrd" id="quantiteDispoPrd" placeholder="quantite disponible produit" 
+                                    [ngModel]="qte" value="qte" readonly>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <div class="row">
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input  type="number"  matInput ngModel name="prixPrd" id="prixPrd" placeholder="prix " required>
+                                </mat-form-field>
+                              </div>
+                             
+                                <div class="col-md-4">
+                                  <mat-form-field class="example-full-width">
+                                    <input  type="date" matInput type="date" ngModel name="dateAjout"  id="dateAjout" placeholder="date Ajout"required>
+                                  </mat-form-field>
+                                </div>
+                                
+                            </div>
+                            <div class="row">
+                                <div class="col-md-12">
+                                  <mat-form-field class="example-full-width">
+                                    <input  type="*"  matInput ngModel name="descriptionPrd" class="form-control" id="descriptionPrd" placeholder="description produit"required>
+                                  </mat-form-field>
+                                </div>
+                            </div>
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="showNotification('bottom','right','produit')"[disabled]="addForm.invalid">ajouter produit</button>
+                            <button routerLink='/liste-produit' mat-raised-button  class="btn btn-danger pull-right">retour liste des produits </button>
+                            <div class="clearfix"></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

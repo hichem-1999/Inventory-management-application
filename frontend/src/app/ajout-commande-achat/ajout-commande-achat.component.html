@@ -1,0 +1,117 @@
+<div class="main-content">
+  <div class="container-fluid">
+      <div class="row">
+          <div class="col-md-8">
+              <div class="card">
+                  <div class="card-header card-header-danger">
+                      <h4 class="card-title">Ajout CommandeAchat</h4>
+                      
+                  </div>
+                  <div class="card-body">
+                      <form #addForm="ngForm" (ngSubmit)="onAddCommandeAchat(addForm)">
+                          <div class="row"> 
+                              <div class="col-md-3">
+                     
+                                  <mat-form-field class="example-full-width">
+                                    <input matInput ngModel name="dateCmd" class="form-control" id="dateCmd" placeholder="date commandeAchat " type="date" required>
+                                  </mat-form-field>
+                              </div>
+                              <div class="col-md-3">
+                                <label>mode de Paiement</label>
+                                <div class="form-inline " >
+                                  <label class="form-check-label">
+                                    <input type="radio" class="form-check-input"  ngModel name="modePaiement" id="modePaiement"  value="cheque">cheque
+                                  </label>
+                                </div>
+                                <div class="form-inline">
+                                  <label class="form-check-label">
+                                    <input type="radio" class="form-check-input"  ngModel name="modePaiement" id="modePaiement"  value="espece" >espece
+                                  </label>
+                                </div>
+                               
+                              </div>
+                               
+                                <div class="col-md-3">
+                                  <label>mode livraison</label>
+                                  <div class="form-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input"  ngModel name="modeLiver" id="modeLiver"  value=" poste"> poste
+                                    </label>
+                                  </div>
+                                  <div class="form-inline">
+                                    <label class="form-check-label">
+                                      <input type="radio" class="form-check-input"  ngModel name="modeLiver" id="modeLiver"  value="a domocile" >a domicile
+                                    </label>
+                                  </div>
+                                 
+                                </div>
+                                <div class="col-md-3">
+                                  <mat-form-field appearance="fill">
+                                    <mat-label>Fournisseur</mat-label>
+                                    <mat-select ngModel name="fournisseur" >
+                                      <mat-option  *ngFor="let fournisseur of fournisseurs"  id="fournisseur"  [value]="fournisseur"  >{{fournisseur.nomUser}}</mat-option>
+                                    </mat-select>
+                                  </mat-form-field>
+                                </div>
+                          </div>
+                          
+
+                          <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input type="number" matInput ngModel name="prixTotLiver" id="prixTotLiver" placeholder="prix totale "type="number" required>
+                              </mat-form-field>
+                            </div>
+                            
+                            <div class="col-md-4">
+                              <mat-form-field class="example-full-width">
+                                <input type="number" matInput ngModel name="qteAchete" id="qteAchete" placeholder="Quantité "required>
+                              </mat-form-field>
+                            </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input type="number" matInput ngModel name="montantCmd" id="montantCmd" placeholder="montant "required>
+                                </mat-form-field>
+                              </div>
+                          </div>
+                          <div class="row">
+                            <div class="col-md-4">
+                              <mat-form-field appearance="fill" >
+                                  <mat-label>Produit</mat-label>
+                                  <mat-select ngModel name="product">
+  
+                                      <mat-option value="chemise">chemise</mat-option>
+                                      <mat-option value="pull">pull</mat-option>
+                                      <mat-option value="jean">jean </mat-option>
+                                      <mat-option value="chaussure">chaussure </mat-option>
+                                      <mat-option value="accesoire">accesoire </mat-option>
+                                  </mat-select>
+                              </mat-form-field>
+                          </div>
+                         
+                           
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input type="text" matInput  ngModel name="lieuLiverCmd"  id="lieuLiverCmd" placeholder="lieu de livraison"required>
+                                </mat-form-field>
+                              </div>
+                              <div class="col-md-4">
+                                <mat-form-field class="example-full-width">
+                                  <input type="number" matInput  ngModel name="delaiLivrCmd"  id="delaiLivrCmd" placeholder="delai livraison"required>
+                                </mat-form-field>
+                              </div>
+                              
+                          </div>
+                          
+                          <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="showNotification('bottom','right','commande achat')"[disabled]="addForm.invalid">ajouter commande achat</button>
+                          <button routerLink='/liste-commande-achat' mat-raised-button  class="btn btn-danger pull-right">retour liste des commande  achats </button>
+                          <div class="clearfix"></div>
+                          
+                      </form>
+                  </div>
+              </div>
+          </div>
+      </div>
+  </div>
+</div>
+ 

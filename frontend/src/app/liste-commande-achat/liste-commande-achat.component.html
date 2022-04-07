@@ -1,0 +1,210 @@
+<div class="main-content" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste Des Commande Achats</h4>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <form class="form-inline my-5 my-lg-0">
+                                <input type="search" (ngModelChange)="searchCommandeAchat(key.value)" #key="ngModel" ngModel
+                                name="key" id="searchName" class="form-control mr-sm-2" placeholder="Recherche CommandeAchats..." required>
+                                <a disabled  type="icon" >
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </a>
+    
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <thead class=" text-primary text-center">
+    
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Fournisseur
+                                </th>
+                                <th>
+                                    Produit
+                                </th>
+                                <th>
+                                    Quantité
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+    
+                                <th>
+                                    Delai De Livraison
+                                </th>
+    
+                                <th>
+                                    Lieu De Livraison
+                                </th>
+                                <th>
+                                    Mode Livraison
+                                </th>
+                                <th>
+                                    Montant
+                                </th>
+    
+                                <th>
+                                    Prix Totale
+                                </th>
+                                <th>
+                                    Mode De Paiement
+    
+                                </th>
+                                <th>
+                                    Modifier/Supprimer
+                                </th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let commandeAchat of commandeAchats" class="th-actions text-center">
+    
+    
+                            <th>{{commandeAchat?.id}}</th>
+                            <th>{{commandeAchat.fournisseur?.nomUser}}</th>
+                            <th >{{commandeAchat?.product}}</th>
+                            <th >{{commandeAchat?.qteAchete}}</th>
+                            <th >{{commandeAchat?.dateCmd}}</th>
+                           
+                            <th >{{commandeAchat?.delaiLivrCmd}}<span>jour</span></th>
+    
+                            <th >{{commandeAchat?.lieuLiverCmd}}</th>
+                            <th >{{commandeAchat?.modeLiver}}</th>
+                            <th >{{commandeAchat?.montantCmd}}<span>$</span></th>
+                            <th >{{commandeAchat?.prixTotLiver}}<span>$</span></th>
+                            <th >{{commandeAchat?.modePaiement}}</th>
+    
+                            <th ><div class="th-actions text-center">
+                                <a  (click)="onOpenModal(commandeAchat, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Modifier" [matTooltipPosition]="'above'"
+                                data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                <a (click)="onOpenModal(commandeAchat, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Supprimer" [matTooltipPosition]="'above'"data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div></th>
+    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+            </div>
+            </div>
+            </div>
+    <button routerLink='/ajout-commande-achat' mat-raised-button  class="btn btn-danger pull-right">ajouter commande achat </button>
+            </div>
+            </div>
+            <!--edit commandeAchat-->
+    <div class="modal fade" id="updateCommandeAchatModal" tabindex="-1" role="dialog" aria-labelledby="commandeAchatEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5  class="modal-title " id="updateCommandeAchatModalLabel">Modifier CommandeAchat </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm">
+                <div class="form-group">
+    
+                    <label for="dateCmd">date</label>
+                    <input type="date" ngModel="{{editCommandeAchat?.dateCmd}}" name="dateCmd" class="form-control" id="date"  required>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Fournisseur</mat-label>
+                      <mat-select ngModel name="fournisseur" >
+                        <mat-option  *ngFor="let fournisseur of fournisseurs"  id="fournisseur"  [value]="fournisseur"  >{{fournisseur.nomUser}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <label for="qteAchete">Quantié</label>
+                    <input type="text" ngModel="{{editCommandeAchat?.qteAchete}}" name="qteAchete" class="form-control" id="qteAchete"  required>
+                </div>
+                <div class="form-group">
+                    <mat-form-field appearance="fill" >
+                        <mat-label>Produit</mat-label>
+                        <mat-select ngModel name="product">
+                            
+                            <mat-option value="chemise">chemise</mat-option>
+                            <mat-option value="pull">pull</mat-option>
+                            <mat-option value="jean">jean </mat-option>
+                            <mat-option value="chaussure">chaussure </mat-option>
+                            <mat-option value="accesoire">accesoire </mat-option>
+                        </mat-select>
+                    </mat-form-field>
+                </div>
+               
+
+                <input type="hidden" ngModel="{{editCommandeAchat?.id}}" name="id" class="form-control" id="id" >
+                <div class="form-group">
+                    <label for="montantCmd">Montant</label>
+                    <input type="text" ngModel="{{editCommandeAchat?.montantCmd}}" name="montantCmd" class="form-control" id="montantCmd"  required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="delaiLivrCmd">delai de livraison</label>
+                    <input type="text" ngModel="{{editCommandeAchat?.delaiLivrCmd}}" name="delaiLivrCmd" class="form-control" id="delaiLivrCmd"  required>
+                </div>
+    
+    
+                <div class="form-group">
+                    <label for="lieuLiverCmd">lieu de livraison</label>
+                    <input  ngModel="{{editCommandeAchat?.lieuLiverCmd}}" name="lieuLiverCmd" class="form-control" id="lieuLiverCmd"  required>
+                </div>
+                <div class="form-group">
+                    <label for="modeLiver">mode livraison</label>
+                    <input type="text" ngModel="{{editCommandeAchat?.modeLiver}}" name="modeLiver" class="form-control" id="modeLiver"  required>
+                </div>
+                <div class="form-group">
+                    <label for="prixTotLiver">prix totale</label>
+                    <input type="number" ngModel="{{editCommandeAchat?.prixTotLiver}}" name="prixTotLiver" class="form-control" id="prixTotLiver" required>
+                </div>
+                <div class="form-group">
+                    <label for="modePaiement">mode de Paiement</label>
+                    <input type="email"  ngModel="{{editCommandeAchat?.modePaiement}}" name="modePaiement" class="form-control" id="modePaiement"  required>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                    <button (click)="onUpdateCommandeAchat(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Sauvgarder</button>
+            </div>
+        </form>
+    </div>
+    </div>
+            </div>
+            </div>
+    
+            <!-- Delete Modal-->
+    <div class="modal fade" id="deleteCommandeAchatModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Supprimer CommandeAchat</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>êtes-vous sûr de vouloir supprimer CommandeAchat: <span>{{deleteCommandeAchat?.id }}</span></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button (click)="onDeleteCommandeAchat(deleteCommandeAchat?.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
+            </div>
+        </div>
+    </div>
+    </div>
+            </div>
+    

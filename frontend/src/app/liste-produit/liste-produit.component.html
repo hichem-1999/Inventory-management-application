@@ -1,0 +1,225 @@
+<div class="main-content" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste Des Produits</h4>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                          <span class="navbar-toggler-icon"></span>
+                          </button>
+                          <div class="topright">
+                        
+                                <mat-form-field appearance="fill">
+                                  <mat-label style="color: white;">Filtré par categorie</mat-label>
+                                  <mat-select name="categorie"
+                                  (ngModelChange)="getAllProduitByCateg(categorie.value)" #categorie="ngModel" ngModel>
+                                    <mat-option  *ngFor="let categorie of categories"  id="categorie"  [value]="categorie.id">
+                                        {{categorie.libCategorie}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                          </div>
+                          <div class="topright1">
+                        
+                            <mat-form-field appearance="fill">
+                              <mat-label style="color: white;">Filtré par marque</mat-label>
+                              <mat-select name="marque"
+                              (ngModelChange)="getAllProduitByMarque(marque.value)" #marque ="ngModel" ngModel>
+                                <mat-option  *ngFor="let marque of marques"  id="marque"  [value]="marque.id">
+                                    {{marque.libMarque}}
+                                </mat-option>
+                              </mat-select>
+                            </mat-form-field>
+                      </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                           <form class="form-inline my-2 my-lg-0">
+                               <input type="search" (ngModelChange)="searchProduit(key.value)" #key="ngModel" ngModel
+                                name="key" id="searchName" class="form-control mr-sm-2" placeholder="Recherche produits..." required>
+                                <a disabled  type="icon" >
+                                   <i class="material-icons">search</i>
+                                   <div class="ripple-container"></div>
+                                </a>
+    
+                            </form>
+                           </div>
+                   </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                                <thead class=" text-primary text-center">
+                                    
+                                    <th>
+                                        Nom Produit
+                                    </th>
+                                    <th>
+                                        Description
+                                    </th>
+                                    <th>
+                                        Categorie
+                                    </th>
+                                    <th>
+                                        Marque
+                                    </th>
+                                   <!-- <th>
+                                      Fournisseur
+                                    </th>-->
+                                 
+                                    
+                                    <th>
+                                        Prix
+                                    </th>
+                                    <th>
+                                        Solde
+                                    </th>
+                                    <th>
+                                       Quantite Dispoonible
+                                    </th>
+                                    <th>
+                                      Nouveaute
+                                   </th>
+                                  
+                                   <th>
+                                    Date D'ajout
+                                 </th>
+                                   <th>
+                                      Modifier/Supprimer
+                                   </th>
+                                </thead>
+                                <tbody> 
+                                 
+                                  <tr *ngFor="let produit of produits" class="th-actions text-center">
+                                      
+                                      <th >{{produit?.libPrd}}</th>
+                                      <th >{{produit?.descriptionPrd}}</th>
+                                      <th >{{produit.categorie?.libCategorie}}</th>
+                                      <th >{{produit.marque?.libMarque}}</th>
+                                     <!-- <th >{{produit.fournisseur?.nomFrs}}</th>-->
+                                      <th >{{produit?.prixPrd}}<span>$</span></th>
+                                      <th >{{produit?.soldePrd}}</th>
+                                      <th >{{produit?.quantiteDispoPrd}}</th>
+                                      <th >{{produit?.nouveautePrd}}</th>
+                                     
+                                      <th >{{produit?.dateAjout}}</th>
+                                      <th ><div class="th-actions text-center">
+                                          <a  (click)="onOpenModal(produit, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Modifier" [matTooltipPosition]="'above'"
+                                          data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                          <a (click)="onOpenModal(produit, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Supprimer" [matTooltipPosition]="'above'"data-original-title="Delete"><i class="fa fa-times"></i></a>
+                                      </div></th>
+                             
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <button routerLink='/ajout-produit' mat-raised-button  class="btn btn-danger pull-right">ajouter produit </button>
+    </div>
+  </div>
+     <!--edit produit-->
+     <div class="modal fade" id="updateProduitModal" tabindex="-1" role="dialog" aria-labelledby="produitEditModalLabel" aria-hidden="true">
+      <div class="modal-dialog" role="document">
+      <div class="modal-content">
+      <div class="modal-header">
+      <h5 class="modal-title" id="updateProduitModalLabel">Modifier Produit </h5>
+      <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+      </button>
+      </div>
+      
+      <div class="modal-body">
+      <form #editForm="ngForm">
+        <div>
+      <div class="form-group">
+      <label for="libPrd">nom</label>
+      <input type="text" ngModel="{{editProduit?.libPrd}}" name="libPrd" class="form-control" id="libPrd" readonly>
+      </div>
+      <input type="hidden" ngModel="{{editProduit?.id}}" name="id" class="form-control" id="id" >
+      
+      
+      <div class="form-group">
+      <label for="descriptionPrd">description</label>
+      <input type="text" ngModel="{{editProduit?.descriptionPrd}}" name="descriptionPrd" class="form-control" id="descriptionPrd"  required>
+      </div>
+      <!--<div class="form-group">
+        <label for="categorie">categorie</label>
+        <input type="text" ngModel="{{editProduit?.categorie}}" name="categorie" class="form-control" id="categorie"  required>
+        </div>-->
+        <div class="form-group" >
+            <mat-form-field appearance="fill">
+              <mat-label>Categorie</mat-label>
+              <mat-select ngModel name="categorie" ngModel="{{editProduit?.categorie}}"name="categorie" >
+                <mat-option class="form-control"  *ngFor="let categorie of categories"  id="categorie"  [value]="categorie"  >{{categorie.libCategorie}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div>
+          
+          <div class="form-group" >
+            <mat-form-field appearance="fill">
+              <mat-label>Marque</mat-label>
+              <mat-select ngModel name="marque" ngModel="{{editProduit?.marque}}"name="marque" >
+                <mat-option class="form-control"  *ngFor="let marque of marques"  id="marque"  [value]="marque"  >{{marque.libMarque}}</mat-option>
+              </mat-select>
+            </mat-form-field>
+          </div> 
+
+
+          
+      <div class="form-group">
+      <label for="prixPrd">prix</label>
+      <input type="number" ngModel="{{editProduit?.prixPrd}}" name="prixPrd" class="form-control" id="prixPrd" required>
+      </div>
+      <div class="form-group">
+      <label for="soldePrd">soldée</label>
+      <input type="text" ngModel="{{editProduit?.soldePrd}}" name="soldePrd" class="form-control" id="soldePrd"  required>
+      </div>
+      <div class="form-group">
+      <label for="quantiteDispoPrd">quantite Disponible</label>
+      <input type="number" ngModel="{{editProduit?.quantiteDispoPrd}}" name="quantiteDispoPrd" class="form-control" id="quantiteDispoPrd"  readonly>
+      </div>
+      
+      <div class="form-group">
+      <label for="nouveautePrd">nouveaute</label>
+      <input type="text"  ngModel="{{editProduit?.nouveautePrd}}" name="nouveautePrd" class="form-control" id="nouveautePrd"  required>
+      </div>
+ 
+      <div class="form-group">
+      <label for="dateAjout">date d'ajout</label>
+      <input type="date" ngModel="{{editProduit?.dateAjout}}" name="dateAjout" class="form-control" id="dateAjout" required>
+      </div>
+      </div>
+      
+      <div class="modal-footer">
+      <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+      <button (click)="onUpdateProduit(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Sauvgarder</button>
+      </div>
+      </form>
+      </div>
+      </div>
+      </div>
+      </div>
+      
+       <!-- Delete Modal--> 
+        <div class="modal fade" id="deleteProduitModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+        <div class="modal-content">
+        <div class="modal-header">
+        <h5 class="modal-title" id="deleteModelLabel">Supprimer Produit</h5>
+        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+        <span aria-hidden="true"></span>
+        </button>
+        </div>
+        <div class="modal-body">
+        <p>êtes-vous sûr de vouloir supprimer Produit:<span>{{deleteProduit?.libPrd}}</span></p>
+        <div class="modal-footer">
+        <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+        <button (click)="onDeleteProduit(deleteProduit?.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
+        </div>
+        </div>
+        </div>
+        </div>
+        </div>

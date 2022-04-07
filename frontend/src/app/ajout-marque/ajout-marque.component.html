@@ -1,0 +1,33 @@
+<div class="main-content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-8">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title">Ajout Marque</h4>
+                        
+                    </div>
+                    <div class="card-body">
+                        <form #addForm="ngForm" (ngSubmit)="onAddMarque(addForm)">
+                            <div class="row">
+                                
+                                    <div class="col-md-6">
+                                        <mat-form-field class="example-full-width">
+                                          <input  type="text" matInput ngModel name="libMarque"  id="libMarque" placeholder="Marque" required>
+                                        </mat-form-field>
+                                    </div>
+                                    
+                            </div>
+                            
+                            <button mat-raised-button type="submit" class="btn btn-danger pull-right"(click)="showNotification('bottom','right','marque')" [disabled]="addForm.invalid">ajouter marque</button>
+                            <button routerLink='/liste-marque' mat-raised-button  class="btn btn-danger pull-right">retour liste des marques </button>
+                            <div class="clearfix"></div>
+                            
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+  </div>
+  

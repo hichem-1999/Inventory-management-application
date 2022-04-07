@@ -1,0 +1,210 @@
+<div class="main-content" id="main-container">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-header card-header-danger">
+                        <h4 class="card-title ">Liste Des Commande Ventes</h4>
+                        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarColor02" aria-controls="navbarColor02" aria-expanded="false" aria-label="Toggle navigation">
+                            <span class="navbar-toggler-icon"></span>
+                        </button>
+                    </div>
+                    <div class="card-body">
+                        <div class="col-md-12">
+                            <form class="form-inline my-2 my-lg-0">
+                                <input type="search" (ngModelChange)="searchCommandeVente(key.value)" #key="ngModel" ngModel
+                                name="key" id="searchName" class="form-control mr-sm-2" placeholder="Recherche CommandeVentes..." required>
+                                <a disabled  type="icon" >
+                                    <i class="material-icons">search</i>
+                                    <div class="ripple-container"></div>
+                                </a>
+    
+                            </form>
+                        </div>
+                    </div>
+                    <div class="card-body">
+                        <div class="table-responsive">
+                            <table class="table">
+                            <thead class=" text-primary text-center">
+    
+                                <th>
+                                    ID
+                                </th>
+                                <th>
+                                    Client
+                                </th>
+                                <th>
+                                    Produit
+                                </th>
+                                <th>
+                                    Quantité
+                                </th>
+                                <th>
+                                    Date
+                                </th>
+    
+                                <th>
+                                    Delai De Livraison
+                                </th>
+    
+                                <th>
+                                    Lieu De Livraison
+                                </th>
+                                <th>
+                                    Mode Livraison
+                                </th>
+                                <th>
+                                    Montant
+                                </th>
+    
+                                <th>
+                                    Prix Totale
+                                </th>
+                                <th>
+                                    Mode De Paiement
+    
+                                </th>
+                                <th>
+                                    Modifier/Supprimer
+                                </th>
+                            </thead>
+                            <tbody>
+                            <tr *ngFor="let commandeVente of commandeVentes" class="th-actions text-center">
+    
+    
+                            <th >{{commandeVente?.id}}</th>
+                            <th >{{commandeVente.client?.nomUser}}</th>
+                            <th *ngFor="let produit of commandeVente.produits" class="th-actions text-center">
+                            {{produit?.libPrd}}
+                            </th>
+                            <th >{{commandeVente?.qteVendu}}</th>
+                            <th >{{commandeVente?.dateCmd}}</th>
+    
+                            <th >{{commandeVente?.delaiLivrCmd}}<span>jour</span></th>
+    
+                            <th >{{commandeVente?.lieuLiverCmd}}</th>
+                            <th >{{commandeVente?.modeLiver}}</th>
+                            <th >{{commandeVente?.montantCmd}}<span>$</span></th>
+                            <th >{{commandeVente?.prixTotLiver}}<span>$</span></th>
+                            <th >{{commandeVente?.modePaiement}}</th>
+    
+                            <th ><div class="th-actions text-center">
+                                <a  (click)="onOpenModal(commandeVente, 'edit')" class="btn btn-primary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Modifier" [matTooltipPosition]="'above'"
+                                data-original-title="Edit"><i class="fa fa-pencil"></i> </a>
+                                <a (click)="onOpenModal(commandeVente, 'delete')" class="btn btn-secondary tooltips" data-placement="top" data-toggle="tooltip" matTooltip="Supprimer" [matTooltipPosition]="'above'"data-original-title="Delete"><i class="fa fa-times"></i></a>
+                        </div></th>
+    
+                </tr>
+            </tbody>
+        </table>
+    </div>
+    </div>
+            </div>
+            </div>
+            </div>
+    <button routerLink='/ajout-commande-vente' mat-raised-button  class="btn btn-danger pull-right">ajouter commande vente </button>
+            </div>
+            </div>
+            <!--edit commandeVente-->
+    <div class="modal fade" id="updateCommandeVenteModal" tabindex="-1" role="dialog" aria-labelledby="commandeVenteEditModalLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="updateCommandeVenteModalLabel">Modifier CommandeVente </h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form #editForm="ngForm">
+                <div class="form-group">
+    
+                    <label for="dateCmd">date</label>
+                    <input type="date" ngModel="{{editCommandeVente?.dateCmd}}" name="dateCmd" class="form-control" id="date"  required>
+                </div>
+
+                <div class="form-group">
+                    <mat-form-field appearance="fill">
+                      <mat-label>Client</mat-label>
+                      <mat-select ngModel name="client" >
+                        <mat-option  *ngFor="let client of clients"  id="client"  [value]="client"  >{{client.nomUser}}</mat-option>
+                      </mat-select>
+                    </mat-form-field>
+                  </div>
+                  <div class="form-group">
+                    <mat-form-field appearance="fill">
+                                  <mat-label>Produit</mat-label>
+                                  <mat-select name="produit" #produit="ngModel" ngModel>
+                                    <mat-option  *ngFor="let produit of produits"  id="produit"  [value]="produit">
+                                      {{produit.libPrd}}
+                                    </mat-option>
+                                  </mat-select>
+                                </mat-form-field>
+                  </div>
+
+                <input type="hidden" ngModel="{{editCommandeVente?.id}}" name="id" class="form-control" id="id" >
+               
+                <div class="form-group">
+                    <label for="montantCmd">Montant</label>
+                    <input type="text" ngModel="{{editCommandeVente?.montantCmd}}" name="montantCmd" class="form-control" id="montantCmd"  required>
+                </div>
+                
+
+                <div class="form-group">
+                    <label for="qteVendu">Quantié</label>
+                    <input type="text" ngModel="{{editCommandeVente?.qteVendu}}" name="qteVendu" class="form-control" id="qteVendu"  required>
+                </div>
+    
+                <div class="form-group">
+                    <label for="delaiLivrCmd">delai de livraison</label>
+                    <input type="text" ngModel="{{editCommandeVente?.delaiLivrCmd}}" name="delaiLivrCmd" class="form-control" id="delaiLivrCmd"  required>
+                </div>
+    
+    
+                <div class="form-group">
+                    <label for="lieuLiverCmd">lieu de livraison</label>
+                    <input  ngModel="{{editCommandeVente?.lieuLiverCmd}}" name="lieuLiverCmd" class="form-control" id="lieuLiverCmd"  required>
+                </div>
+                <div class="form-group">
+                    <label for="modeLiver">mode livraison</label>
+                    <input type="text" ngModel="{{editCommandeVente?.modeLiver}}" name="modeLiver" class="form-control" id="modeLiver"  required>
+                </div>
+                <div class="form-group">
+                    <label for="prixTotLiver">prix totale</label>
+                    <input type="number" ngModel="{{editCommandeVente?.prixTotLiver}}" name="prixTotLiver" class="form-control" id="prixTotLiver" required>
+                </div>
+                <div class="form-group">
+                    <label for="modePaiement">mode de Paiement</label>
+                    <input type="email"  ngModel="{{editCommandeVente?.modePaiement}}" name="modePaiement" class="form-control" id="modePaiement"  required>
+                </div>
+    
+                <div class="modal-footer">
+                    <button type="button" id="" data-dismiss="modal" class="btn btn-secondary">Fermer</button>
+                    <button (click)="onUpdateCommandeVente(editForm.value)" data-dismiss="modal" class="btn btn-primary" >Sauvgarder</button>
+            </div>
+        </form>
+    </div>
+    </div>
+            </div>
+            </div>
+    
+            <!-- Delete Modal-->
+    <div class="modal fade" id="deleteCommandeVenteModal" tabindex="-1" role="dialog" aria-labelledby="deleteModelLabel" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="deleteModelLabel">Supprimer CommandeVente</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true"></span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <p>êtes-vous sûr de vouloir supprimer CommandeVente: <span>{{deleteCommandeVente?.id}}</span></p>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Non</button>
+                    <button (click)="onDeleteCommandeVente(deleteCommandeVente?.id)" class="btn btn-danger" data-dismiss="modal">Oui</button>
+            </div>
+        </div>
+    </div>
+    </div>
+            </div>
